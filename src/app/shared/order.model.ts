@@ -1,7 +1,7 @@
 export class Order {
     NarudzbaID :number;
     BrojNarudzbe :string;
-    NulKupacID :number;
+    KupacID :number;
     NacinPlacanja :string;
-    NullablUkupno :number;
+    Ukupno :number;
 }
