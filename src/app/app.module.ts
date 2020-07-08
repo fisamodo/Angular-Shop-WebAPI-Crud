@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { AppComponent } from './app.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from "@angular/forms";
@@ -23,7 +24,8 @@ import { OrderService } from './shared/order.service';
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   entryComponents:[OrderItemsComponent],
   providers: [OrderService],

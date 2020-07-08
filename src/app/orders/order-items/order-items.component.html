@@ -5,6 +5,7 @@
         <label>Car Part</label>
         <select name="ProizvodID" #ProizvodID="ngModel" [(ngModel)]="formData.ProizvodID" type="text" class="form-control">
             <option value="0">-Select-</option>
+            <option *ngFor = "let item of itemList" value="{{item.ProizvodID}}">{{item.Naziv}}</option>
         </select>
     </div>
     <div class="form-row">
