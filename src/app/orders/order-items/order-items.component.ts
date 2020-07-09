@@ -14,6 +14,7 @@ import { OrderService } from 'src/app/shared/order.service';
 export class OrderItemsComponent implements OnInit {
   formData: OrderItem;
   itemList: Item[];
+  isValid: boolean = true;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data,
@@ -24,25 +25,29 @@ export class OrderItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemService.getItemList().then(res => this.itemList = res as Item[]);
-
+    if(this.data.orderItemIndex == null)
+    {
     this.formData={
       NaruceniProizvodID: null,
       NarudzbaID: this.data.NarudzbaID,
       ProizvodID: 0,
-      Proizvod:'',
+      Naziv:'',
       Cijena: 0,
       Kolicina:0,
       Ukupno:0
     }
+  }else{
+    this.formData = Object.assign({},this.orderService.orderItems[this.data.orderItemIndex]);
+  }
   }
   updatePrice(ctrl){
     if(ctrl.selectedIndex == 0){
       this.formData.Cijena = 0;
-      this.formData.Proizvod ='';
+      this.formData.Naziv ='';
     }
     else{
       this.formData.Cijena = this.itemList[ctrl.selectedIndex-1].Cijena;
-      this.formData.Proizvod = this.itemList[ctrl.selectedIndex-1].Naziv;
+      this.formData.Naziv = this.itemList[ctrl.selectedIndex-1].Naziv;
 
     }
     this.updateTotal();
@@ -52,8 +57,29 @@ export class OrderItemsComponent implements OnInit {
   }
 
   onSubmit(form:NgForm){
-    this.orderService.orderItems.push(form.value);
-    this.dialogRef.close();
+    if(this.validateForm(form.value)){
+      if(this.data.orderItemIndex == null)
+      {
+      this.orderService.orderItems.push(form.value);
+      }else{
+      this.orderService.orderItems[this.data.orderItemIndex] = form.value
+      }
+      this.dialogRef.close();
+
+    }
+
+  }
+
+  validateForm(formData:OrderItem){
+    this.isValid = true;
+    if(formData.ProizvodID == 0){
+      this.isValid = false;
+    }else if(formData.Kolicina ==0){
+    this.isValid = false;
+    }
+    return this.isValid;
+
+
   }
 
 }

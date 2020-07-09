@@ -3,7 +3,7 @@ export class OrderItem {
     NarudzbaID: number;
     ProizvodID: number;
     Kolicina: number;
-    Proizvod: string;
+    Naziv: string;
     Cijena: number;
     Ukupno: number;
 }

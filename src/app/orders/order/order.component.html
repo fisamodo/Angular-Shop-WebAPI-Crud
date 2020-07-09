@@ -60,8 +60,10 @@
                 <td>{{item.Cijena}}</td>
                 <td>{{item.Kolicina}}</td>
                 <td>{{item.Ukupno}}</td>
+
                 <td>
                     <a class="btn btn-sm btn-info text-white" (click)="AddOrEditOrderItem(i, service.formData.NarudzbaID)"><i class="fa fa-pencil"></i></a>
+                    <a class="btn btn-sm btn-danger text-white ml-1" (click)="onDeleteOrderItem(item.NarudzbaID, service.formData.NarudzbaID)"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
         </tbody>
