@@ -2,8 +2,8 @@ export class OrderItem {
     NaruceniProizvodID: number;
     NarudzbaID: number;
     ProizvodID: number;
+    ProizvodNaziv: string;
     Kolicina: number;
-    Naziv: string;
     Cijena: number;
     Ukupno: number;
 }

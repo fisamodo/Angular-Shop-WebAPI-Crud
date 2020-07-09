@@ -31,7 +31,7 @@ export class OrderItemsComponent implements OnInit {
       NaruceniProizvodID: null,
       NarudzbaID: this.data.NarudzbaID,
       ProizvodID: 0,
-      Naziv:'',
+      ProizvodNaziv:'',
       Cijena: 0,
       Kolicina:0,
       Ukupno:0
@@ -43,11 +43,11 @@ export class OrderItemsComponent implements OnInit {
   updatePrice(ctrl){
     if(ctrl.selectedIndex == 0){
       this.formData.Cijena = 0;
-      this.formData.Naziv ='';
+      this.formData.ProizvodNaziv ='';
     }
     else{
       this.formData.Cijena = this.itemList[ctrl.selectedIndex-1].Cijena;
-      this.formData.Naziv = this.itemList[ctrl.selectedIndex-1].Naziv;
+      this.formData.ProizvodNaziv = this.itemList[ctrl.selectedIndex-1].Naziv;
 
     }
     this.updateTotal();
