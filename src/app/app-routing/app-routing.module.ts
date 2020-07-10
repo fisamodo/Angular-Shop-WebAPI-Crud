@@ -10,7 +10,7 @@ import { OrderComponent } from '../orders/order/order.component';
           {path:'',component:OrderComponent},
           {path:'edit/:id',component:OrderComponent}
 
-        ]}
+        ]},
     ];
 
     @NgModule({

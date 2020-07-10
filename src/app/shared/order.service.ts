@@ -20,4 +20,8 @@ export class OrderService {
     }
     return this.http.post(environment.apiURL+'/Narudzba', body);
   }
+
+  getOrderList(){
+    return this.http.get(environment.apiURL+'/Narudzba').toPromise();
+  }
 }

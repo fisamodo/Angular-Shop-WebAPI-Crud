@@ -1,1 +1,20 @@
-<p>orders works!</p>
+<table class="table table-hover">
+    <thead class="thead-light">
+        <th>#BR Narudzbe</th>
+        <th>Ime</th>
+        <th>Nacin Placanja</th>
+        <th>Ukupno</th>
+        <th>
+            <a class="btn btn-outline-success" routerLink="/order"><i class="fa fa-plus"></i> Nova Narudžba</a>
+        </th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of orderList">
+            <th>{{item.BrojNarudzbe}}</th>
+            <td>{{item.Kupac}}</td>
+            <td>{{item.NacinPlacanja}}</td>
+            <td>{{item.Ukupno}}</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
