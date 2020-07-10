@@ -13,6 +13,7 @@ import { Customer } from 'src/app/shared/customer.model';
 })
 export class OrderComponent implements OnInit {
   customerList: Customer[];
+  isValid: boolean = true;
 
   constructor(public service: OrderService,
     private dialog: MatDialog,
@@ -57,8 +58,24 @@ export class OrderComponent implements OnInit {
       return previous+current.Ukupno;
     },0);
     this.service.formData.Ukupno = parseFloat(this.service.formData.Ukupno.toFixed(2));
-
   }
 
+  validateForm(){
+    this.isValid = true;
+    if(this.service.formData.KupacID == 0){
+      this.isValid = false;
+    }else if(this.service.orderItems.length == 0){
+      this.isValid = false;
+    }
+    return this.isValid;
+  }
+
+  onSubmit(form: NgForm){
+    if(this.validateForm()){
+      this.service.saveOrUpdateOrder().subscribe(res =>{
+        this.resetForm();
+      })
+    }
+  }
 
 }
