@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class OrderService {
-  formData: Order;
-  orderItems: OrderItem[];
+  public formData: Order;
+  public orderItems: OrderItem[];
 
   constructor(private http: HttpClient) { }
 
