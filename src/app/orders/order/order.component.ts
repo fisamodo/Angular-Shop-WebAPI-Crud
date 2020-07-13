@@ -6,7 +6,8 @@ import { OrderItemsComponent } from '../order-items/order-items.component';
 import { CustomerService } from 'src/app/shared/customer.service';
 import { Customer } from 'src/app/shared/customer.model';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { OrderItem } from 'src/app/shared/order-item.model';
 
 @Component({
   selector: 'app-order',
@@ -21,10 +22,20 @@ export class OrderComponent implements OnInit {
     private dialog: MatDialog,
     private customerService: CustomerService,
     private toastr: ToastrService,
-    private router: Router) { }
+    private router: Router,
+    private currentRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    let orderID = this.currentRoute.snapshot.paramMap.get('id');
+    if(orderID  == null){
     this.resetForm();
+    }else{
+      this.service.getOrderByID(parseInt(orderID)).then(res =>{
+        this.service.formData = res.order;
+        this.service.orderItems = res.orderDetails;
+
+      });
+    }
 
     this.customerService.getCustomerList().then(res => this.customerList = res as Customer[]);
   }
@@ -33,11 +44,12 @@ export class OrderComponent implements OnInit {
     if(form = null)
       form.resetForm();
     this.service.formData = {
-      NarudzbaID: null,
-      BrojNarudzbe: Math.floor(100000+Math.random()*900000).toString(), //returns random 6digit number
-      KupacID: 0,
-      NacinPlacanja:'',
-      Ukupno: 0
+      OrderID: null,
+      OrderNo: Math.floor(100000+Math.random()*900000).toString(), //returns random 6digit number
+      CustomerID: 0,
+      PMethod:'',
+      GTotal: 0,
+      DeletedOrderItemIDs:''
     };
     this.service.orderItems=[];
   }
@@ -52,21 +64,26 @@ export class OrderComponent implements OnInit {
       this.updateGrandTotal();
     });
   }
-  onDeleteOrderItem(NarudzbaID: number, i: number){
+  onDeleteOrderItem(NaruceniProizvodID: number, i: number){
+    if(NaruceniProizvodID!=null)
+    {
+      this.service.formData.DeletedOrderItemIDs += NaruceniProizvodID + ",";
+    }
+    console.log("check");
     this.service.orderItems.splice(i,1);
     this.updateGrandTotal();
   }
 
   updateGrandTotal(){
-   this.service.formData.Ukupno = this.service.orderItems.reduce((previous,current)=>{
-      return previous+current.Ukupno;
+   this.service.formData.GTotal = this.service.orderItems.reduce((previous,current)=>{
+      return previous+current.Total;
     },0);
-    this.service.formData.Ukupno = parseFloat(this.service.formData.Ukupno.toFixed(2));
+    this.service.formData.GTotal = parseFloat(this.service.formData.GTotal.toFixed(2));
   }
 
   validateForm(){
     this.isValid = true;
-    if(this.service.formData.KupacID == 0){
+    if(this.service.formData.CustomerID == 0){
       this.isValid = false;
     }else if(this.service.orderItems.length == 0){
       this.isValid = false;

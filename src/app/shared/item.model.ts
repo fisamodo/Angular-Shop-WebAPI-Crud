@@ -1,6 +1,6 @@
 export class Item {
-    ProizvodID :number;
-    Naziv :string;
-    Cijena :number;
+    ItemID :number;
+    Name :string;
+    Price :number;
          
 }

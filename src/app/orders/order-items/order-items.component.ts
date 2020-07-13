@@ -28,13 +28,13 @@ export class OrderItemsComponent implements OnInit {
     if(this.data.orderItemIndex == null)
     {
     this.formData={
-      NaruceniProizvodID: null,
-      NarudzbaID: this.data.NarudzbaID,
-      ProizvodID: 0,
-      ProizvodNaziv:'',
-      Cijena: 0,
-      Kolicina:0,
-      Ukupno:0
+      OrderItemID: null,
+      OrderID: this.data.OrderID,
+      ItemID: 0,
+      ItemName:'',
+      Price: 0,
+      Quantity:0,
+      Total:0
     }
   }else{
     this.formData = Object.assign({},this.orderService.orderItems[this.data.orderItemIndex]);
@@ -42,18 +42,18 @@ export class OrderItemsComponent implements OnInit {
   }
   updatePrice(ctrl){
     if(ctrl.selectedIndex == 0){
-      this.formData.Cijena = 0;
-      this.formData.ProizvodNaziv ='';
+      this.formData.Price = 0;
+      this.formData.ItemName ='';
     }
     else{
-      this.formData.Cijena = this.itemList[ctrl.selectedIndex-1].Cijena;
-      this.formData.ProizvodNaziv = this.itemList[ctrl.selectedIndex-1].Naziv;
+      this.formData.Price = this.itemList[ctrl.selectedIndex-1].Price;
+      this.formData.ItemName = this.itemList[ctrl.selectedIndex-1].Name;
 
     }
     this.updateTotal();
   }
   updateTotal(){
-    this.formData.Ukupno = parseFloat((this.formData.Kolicina * this.formData.Cijena).toFixed(2));
+    this.formData.Total = parseFloat((this.formData.Quantity * this.formData.Price).toFixed(2));
   }
 
   onSubmit(form:NgForm){
@@ -65,21 +65,16 @@ export class OrderItemsComponent implements OnInit {
       this.orderService.orderItems[this.data.orderItemIndex] = form.value
       }
       this.dialogRef.close();
-
     }
-
   }
-
   validateForm(formData:OrderItem){
     this.isValid = true;
-    if(formData.ProizvodID == 0){
+    if(formData.ItemID == 0){
       this.isValid = false;
-    }else if(formData.Kolicina ==0){
+    }else if(formData.Quantity ==0){
     this.isValid = false;
     }
     return this.isValid;
-
-
   }
 
 }

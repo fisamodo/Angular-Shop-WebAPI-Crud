@@ -16,12 +16,16 @@ export class OrderService {
   saveOrUpdateOrder(){
     var body={
       ...this.formData,
-      NaruceniProizvodi: this.orderItems
+      Naziv: this.orderItems
     }
-    return this.http.post(environment.apiURL+'/Narudzba', body);
+    return this.http.post(environment.apiURL+'/Order', body);
   }
 
   getOrderList(){
-    return this.http.get(environment.apiURL+'/Narudzba').toPromise();
+    return this.http.get(environment.apiURL+'/Order').toPromise();
+  }
+
+  getOrderByID(id: number):any {
+    return this.http.get(environment.apiURL+'/Order/'+id).toPromise();
   }
 }

@@ -1,7 +1,8 @@
 export class Order {
-    NarudzbaID :number;
-    BrojNarudzbe :string;
-    KupacID :number;
-    NacinPlacanja :string;
-    Ukupno :number;
+    OrderID :number;
+    OrderNo :string;
+    CustomerID :number;
+    PMethod :string;
+    GTotal :number;
+    DeletedOrderItemIDs: string;
 }
