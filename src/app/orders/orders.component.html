@@ -14,7 +14,9 @@
             <td (click)="openForEdit(item.OrderID)">{{item.Customer}}</td>
             <td (click)="openForEdit(item.OrderID)">{{item.PMethod}}</td>
             <td (click)="openForEdit(item.OrderID)">{{item.GTotal}}</td>
-            <td></td>
+            <td>
+                <a class="btn text-danger" (click)="onOrderDelete(item.OrderID)" routerLink="/order"><i class="fa fa-trash fa-lg"></i></a>
+            </td>
         </tr>
     </tbody>
 </table>
