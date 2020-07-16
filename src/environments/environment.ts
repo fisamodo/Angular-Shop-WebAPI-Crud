@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'http://webapi.local/api'
+  apiURL: 'https://apiwithemail20200716052243.azurewebsites.net/api'
 };
 
 /*
