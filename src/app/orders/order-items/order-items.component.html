@@ -1,14 +1,14 @@
-<h4 class="display-4">Buy Car Parts</h4>
+<h4 class="display-4">Naruči Auto Dijelove</h4>
 <hr>
 <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
     <input type="hidden" name="OrderItemID" #OrderItemID="ngModel" [(ngModel)]="formData.OrderItemID">
     <input type="hidden" name="OrderID" #OrderID="ngModel" [(ngModel)]="formData.OrderID">
     <input type="hidden" name="ItemName" #ItemName="ngModel" [(ngModel)]="formData.ItemName">
     <div class="form-group">
-        <label>Car Part</label>
+        <label>Dio za naručit</label>
         <select name="ItemID" #ItemID="ngModel" [(ngModel)]="formData.ItemID" type="text" class="form-control" (change)="updatePrice($event.target)"
         [class.is-invalid]="!isValid && formData.ItemID==0">
-            <option value="0">-Select-</option>
+            <option value="0">-Odaberi-</option>
             <option *ngFor = "let item of itemList" value="{{item.ItemID}}">{{item.Name}}</option>
         </select>
     </div>

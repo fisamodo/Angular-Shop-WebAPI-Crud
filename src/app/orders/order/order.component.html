@@ -15,7 +15,7 @@
                 <label>Kupac</label>
                 <select name="CustomerID" #CustomerID="ngModel" [(ngModel)]="service.formData.CustomerID" type="text" class="form-control"
                 [class.is-invalid]="!isValid && service.formData.CustomerID==0">
-                    <option value="0">-Select-</option>
+                    <option value="0">-Odaberi-</option>
                     <option *ngFor = "let item of customerList" value="{{item.CustomerID}}">{{item.Name}}</option>
                 </select>
             </div> 
