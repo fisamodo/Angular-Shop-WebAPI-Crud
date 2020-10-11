@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'https://webapiazurezavrsni.azurewebsites.net/api'
+  apiURL: 'https://localhost:44381/api'
 };
 
 /*
